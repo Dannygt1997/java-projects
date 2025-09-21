@@ -1,0 +1,95 @@
+-- 1. Crear tabla catedrático
+CREATE TABLE catedratico (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    direccion VARCHAR(150)
+);
+
+-- 2. Llave primaria ya definida en la creación con PRIMARY KEY
+
+-- 3. Crear tabla cursos_impartidos
+CREATE TABLE cursos_impartidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    anio INT,
+    semestre VARCHAR(10),
+    nombre_curso VARCHAR(100),
+    id_catedratico INT,
+    FOREIGN KEY (id_catedratico) REFERENCES catedratico(id)
+);
+
+-- 4. Llave primaria en cursos_impartidos es 'id'
+
+-- 5. Llave foránea en id_catedratico (ya incluida arriba)
+
+-- 6. Insertar datos en catedratico
+INSERT INTO catedratico (nombre, direccion) VALUES
+('Jose Perez', 'Direccion Central'),
+('Maria Lopez', 'Avenida Siempre Viva'),
+('Carlos Diaz', 'Calle Falsa 123');
+
+-- 7. Mostrar todos los registros
+SELECT * FROM catedratico;
+
+-- 8. Insertar cursos impartidos
+INSERT INTO cursos_impartidos (anio, semestre, nombre_curso, id_catedratico) VALUES
+(2024, '1', 'Matematicas Basicas', 1),
+(2024, '2', 'Fisica Aplicada', 1),
+(2024, '1', 'Quimica General', 2),
+(2024, '2', 'Biologia Celular', 2),
+(2024, '1', 'Historia Universal', 3),
+(2024, '2', 'Literatura Clasica', 3);
+
+-- 9. Mostrar todos los cursos
+SELECT * FROM cursos_impartidos;
+
+
+
+
+-- 1. Crear tabla aeropuerto
+CREATE TABLE aeropuerto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    ciudad VARCHAR(100),
+    pais VARCHAR(100)
+);
+
+-- 2. Llave primaria ya definida
+
+-- 3. Crear tabla vuelo
+CREATE TABLE vuelo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    anio INT,
+    numero_vuelo INT,
+    linea_aerea VARCHAR(100),
+    dias_semana VARCHAR(100),
+    aeropuerto_id INT,
+    FOREIGN KEY (aeropuerto_id) REFERENCES aeropuerto(id)
+);
+
+-- 4. Llave primaria en 'id'
+
+-- 5. Llave foránea aeropuerto_id ya definida
+
+-- 6. Insertar aeropuertos
+INSERT INTO aeropuerto (nombre, ciudad, pais) VALUES
+('Aeropuerto Internacional La Aurora', 'Ciudad de Guatemala', 'Guatemala'),
+('Aeropuerto El Dorado', 'Bogotá', 'Colombia'),
+('Aeropuerto JFK', 'Nueva York', 'Estados Unidos');
+
+-- 7. Mostrar aeropuertos
+SELECT * FROM aeropuerto;
+
+-- 8. Insertar vuelos (asumiendo no hay duplicados en número de vuelo por año)
+INSERT INTO vuelo (anio, numero_vuelo, linea_aerea, dias_semana, aeropuerto_id) VALUES
+(2024, 1, 'Aerolineas MX', 'Lunes,Miercoles,Viernes', 1),
+(2024, 2, 'Aerolineas MX', 'Martes,Jueves', 1),
+(2024, 1, 'Avianca', 'Lunes,Viernes', 2),
+(2024, 2, 'Avianca', 'Miercoles,Sabado', 2),
+(2024, 1, 'Delta', 'Todos', 3),
+(2024, 2, 'United', 'Lunes,Martes', 3);
+
+-- 9. Mostrar vuelos
+SELECT * FROM vuelo;
+
+-- 10. Mostrar vuelos de un aeropuerto específico (por ejemplo, id = 1)
+SELECT * FROM vuelo WHERE aeropuerto_id = 1;
